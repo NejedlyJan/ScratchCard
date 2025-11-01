@@ -20,7 +20,7 @@ final class GetScratchCardUseCaseImpTests: XCTestCase {
     }
 
     func test_givenRepositoryReturnsCard_whenCallAsFunction_thenReturnCard() async {
-        let repositoryMock = ScratchCardRepositoryMock(scratchCard: ScratchCard(state: .activated))
+        let repositoryMock = ScratchCardRepositoryMock(scratchCard: ScratchCard(state: .scratched(code: "test")))
         let sut = makeSUT(repository: repositoryMock)
 
         let card = await sut()
