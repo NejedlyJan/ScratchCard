@@ -22,7 +22,7 @@ final class SetScratchCardUseCaseImpTests: XCTestCase {
 
 extension SetScratchCardUseCaseImpTests {
     private func makeSUT(
-        repository: any ScratchCardRepository = ScratchCardRepositoryMock()
+        repository: some ScratchCardRepository = ScratchCardRepositoryMock()
     ) -> SetScratchCardUseCaseImp {
         SetScratchCardUseCaseImp(repository: repository)
     }
