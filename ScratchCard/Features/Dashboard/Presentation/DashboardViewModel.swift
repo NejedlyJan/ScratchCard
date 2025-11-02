@@ -22,7 +22,7 @@ final class DashboardViewModel {
         case activate
     }
 
-    enum State {
+    enum State: Equatable {
         case loading
         case loaded(ScratchCard)
     }

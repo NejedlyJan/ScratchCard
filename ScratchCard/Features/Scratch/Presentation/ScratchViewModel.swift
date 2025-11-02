@@ -15,7 +15,7 @@ final class ScratchViewModel {
         case error
     }
 
-    enum State {
+    enum State: Equatable {
         case idle
         case scratching
         case success(code: String)

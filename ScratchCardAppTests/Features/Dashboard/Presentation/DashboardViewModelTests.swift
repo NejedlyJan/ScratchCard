@@ -14,9 +14,7 @@ final class DashboardViewModelTests: XCTestCase {
     func test_whenInitialized_thenStateIsLoading() async {
         let sut = makeSUT()
 
-        guard case .loading = sut.state else {
-            return XCTFail("Wrong state, should be .loading")
-        }
+        XCTAssertEqual(sut.state, .loading)
     }
 
     func test_givenNilScratchCard_whenOnAppear_thenStateIsLoaded_andUnscratched() async {
@@ -76,9 +74,7 @@ final class DashboardViewModelTests: XCTestCase {
 
         sut.onScratch()
 
-        guard case .scratch = action else {
-            return XCTFail("Wrong action, should be .scratch")
-        }
+        XCTAssertEqual(action, .scratch)
     }
 
     func test_whenOnActivate_theInvokeAction() async {
@@ -89,9 +85,7 @@ final class DashboardViewModelTests: XCTestCase {
 
         sut.onActivate()
 
-        guard case .activate = action else {
-            return XCTFail("Wrong action, should be .activate")
-        }
+        XCTAssertEqual(action, .activate)
     }
 }
 

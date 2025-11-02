@@ -13,10 +13,8 @@ final class ScratchViewModelTests: XCTestCase {
     
     func test_whenInitialized_thenStateIsIdle() async {
         let sut = makeSUT()
-        
-        guard case .idle = sut.state else {
-            return XCTFail("Wrong state, should be .idle")
-        }
+
+        XCTAssertEqual(sut.state, .idle)
     }
     
     func test_givenSuccessfulCode_whenScratch_thenStateIsSuccess() async {
@@ -46,13 +44,8 @@ final class ScratchViewModelTests: XCTestCase {
 
         await sut.scratch()
 
-        guard case .idle = sut.state else {
-            return XCTFail("Wrong state, should be .idle")
-        }
-
-        guard case .error = action else {
-            return XCTFail("Wrong action, should be .error")
-        }
+        XCTAssertEqual(sut.state, .idle)
+        XCTAssertEqual(action, .error)
     }
 }
 

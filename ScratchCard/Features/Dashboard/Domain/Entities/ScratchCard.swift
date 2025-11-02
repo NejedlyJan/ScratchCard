@@ -5,7 +5,7 @@
 //  Created by Jan Nejedlý on 01.11.2025.
 //
 
-struct ScratchCard {
+struct ScratchCard: Equatable {
     enum ScratchCardState: Equatable {
         case unscratched
         case scratched(code: String)
