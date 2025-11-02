@@ -11,6 +11,10 @@ final class DependencyContainer {
         GenerateScratchCardServiceImp()
     }()
 
+    private lazy var activationService: ActivationService = {
+        ActivationServiceImp()
+    }()
+
     // MARK: - Repositories
     private lazy var scratchCardRepository: ScratchCardRepository = {
         ScratchCardRepositoryImp()
@@ -20,12 +24,17 @@ final class DependencyContainer {
         GenerateScratchCardRepositoryImp(service: generateScratchCardService)
     }()
 
+    private lazy var activationRepository: ActivationRepository = {
+        ActivationRepositoryImp(service: activationService)
+    }()
+
     // MARK: - Flows
     func makeDashboardFlow() -> DashboardFlow {
         DashboardFlow(
             dependencies: DashboardFlow.Dependencies(
                 dashboardView: makeDashboardView,
-                scratchFlow: makeScratchFlow
+                scratchFlow: makeScratchFlow,
+                activationFlow: makeActivationFlow
             )
         )
     }
@@ -34,6 +43,14 @@ final class DependencyContainer {
         ScratchFlow(
             dependencies: ScratchFlow.Dependencies(
                 scratchView: makeScratchView
+            )
+        )
+    }
+
+    func makeActivationFlow() -> ActivationFlow {
+        ActivationFlow(
+            dependencies: ActivationFlow.Dependencies(
+                activationView: makeActivationView
             )
         )
     }
@@ -65,5 +82,22 @@ final class DependencyContainer {
             )
         )
         return ScratchView(viewModel: viewModel)
+    }
+
+    @MainActor
+    private func makeActivationView(parameters: ActivationViewModel.Parameters) -> ActivationView {
+        let getScratchCardUseCase = GetScratchCardUseCaseImp(repository: scratchCardRepository)
+        let setScratchCardUseCase = SetScratchCardUseCaseImp(repository: scratchCardRepository)
+        let activateCardUseCase = ActivateCardUseCaseImp(repository: activationRepository)
+
+        let viewModel = ActivationViewModel(
+            parameters: parameters,
+            dependencies: ActivationViewModel.Dependencies(
+                getScratchCardUseCase: getScratchCardUseCase,
+                setScratchCardUseCase: setScratchCardUseCase,
+                activateCardUseCase: activateCardUseCase
+            )
+        )
+        return ActivationView(viewModel: viewModel)
     }
 }

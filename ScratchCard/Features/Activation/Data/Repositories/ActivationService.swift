@@ -37,7 +37,7 @@ final class ActivationServiceImp: ActivationService {
             throw ActivationError.invalidResponse
         }
 
-        return 6
+        return version
     }
 }
 

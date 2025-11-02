@@ -1,5 +1,5 @@
 //
-//  ScratchFlow.swift
+//  DashboardFlow.swift
 //  ScratchCard
 //
 //  Created by Jan Nejedlý on 01.11.2025.
@@ -11,10 +11,12 @@ struct DashboardFlow: View {
     struct Dependencies {
         let dashboardView: (DashboardViewModel.Parameters) -> DashboardView
         let scratchFlow: () -> ScratchFlow
+        let activationFlow: () -> ActivationFlow
     }
 
     enum Destination: Hashable {
         case scratch
+        case activation
     }
 
     let dependencies: Dependencies
@@ -29,7 +31,8 @@ struct DashboardFlow: View {
                         switch onAction {
                         case .scratch:
                             navigationPath.append(Destination.scratch)
-                        case .activate: break
+                        case .activate:
+                            navigationPath.append(Destination.activation)
                         }
                     }
                 )
@@ -38,6 +41,8 @@ struct DashboardFlow: View {
                 switch destination {
                 case .scratch:
                     dependencies.scratchFlow()
+                case .activation:
+                    dependencies.activationFlow()
                 }
             }
         }
