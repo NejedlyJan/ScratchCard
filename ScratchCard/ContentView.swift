@@ -11,8 +11,6 @@ struct ContentView: View {
     let container: DependencyContainer
 
     var body: some View {
-        container.makeScratchFlow(
-            parameters: ScratchFlow.Parameters(onFinish: {})
-        )
+        container.makeDashboardFlow()
     }
 }

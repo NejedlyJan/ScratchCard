@@ -21,16 +21,37 @@ final class DependencyContainer {
     }()
 
     // MARK: - Flows
-    func makeScratchFlow(parameters: ScratchFlow.Parameters) -> ScratchFlow {
+    func makeDashboardFlow() -> DashboardFlow {
+        DashboardFlow(
+            dependencies: DashboardFlow.Dependencies(
+                dashboardView: makeDashboardView,
+                scratchFlow: makeScratchFlow
+            )
+        )
+    }
+
+    func makeScratchFlow() -> ScratchFlow {
         ScratchFlow(
             dependencies: ScratchFlow.Dependencies(
                 scratchView: makeScratchView
-            ),
-            parameters: parameters
+            )
         )
     }
 
     // MARK: - Views
+    @MainActor
+    private func makeDashboardView(parameters: DashboardViewModel.Parameters) -> DashboardView {
+        let getScratchCardUseCase = GetScratchCardUseCaseImp(repository: scratchCardRepository)
+
+        let viewModel = DashboardViewModel(
+            parameters: parameters,
+            dependencies: DashboardViewModel.Dependencies(
+                getScratchCardUseCase: getScratchCardUseCase
+            )
+        )
+        return DashboardView(viewModel: viewModel)
+    }
+
     @MainActor
     private func makeScratchView(parameters: ScratchViewModel.Parameters) -> ScratchView {
         let setScratchCardUseCase = SetScratchCardUseCaseImp(repository: scratchCardRepository)

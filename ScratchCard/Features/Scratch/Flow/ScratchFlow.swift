@@ -12,12 +12,7 @@ struct ScratchFlow: View {
         let scratchView: (ScratchViewModel.Parameters) -> ScratchView
     }
 
-    struct Parameters {
-        let onFinish: () -> Void
-    }
-
     let dependencies: Dependencies
-    let parameters: Parameters
 
     @State private var isShowingError = false
 
