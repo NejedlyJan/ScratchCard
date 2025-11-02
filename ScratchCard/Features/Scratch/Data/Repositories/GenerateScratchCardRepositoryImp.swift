@@ -5,7 +5,7 @@
 //  Created by Jan Nejedlý on 01.11.2025.
 //
 
-actor GenerateScratchCardRepositoryImp: GenerateScratchCardRepository {
+final class GenerateScratchCardRepositoryImp: GenerateScratchCardRepository {
     private let service: GenerateScratchCardService
 
     init(service: GenerateScratchCardService) {
