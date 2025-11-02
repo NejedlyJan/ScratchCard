@@ -8,7 +8,7 @@ final class ScratchViewModel {
     }
 
     struct Parameters {
-        let onAction: (Action) -> Void
+        let onAction: @MainActor (Action) -> Void
     }
 
     enum Action {
@@ -26,6 +26,7 @@ final class ScratchViewModel {
     private let parameters: Parameters
     private let dependencies: Dependencies
 
+    @MainActor
     init(
         parameters: Parameters,
         dependencies: Dependencies

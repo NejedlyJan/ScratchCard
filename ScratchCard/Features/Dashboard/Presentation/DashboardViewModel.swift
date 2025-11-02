@@ -14,7 +14,7 @@ final class DashboardViewModel {
     }
 
     struct Parameters {
-        let onAction: (Action) -> Void
+        let onAction: @MainActor (Action) -> Void
     }
 
     enum Action {

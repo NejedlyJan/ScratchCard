@@ -16,7 +16,7 @@ final class ActivationViewModel {
     }
 
     struct Parameters {
-        let onAction: (Action) -> Void
+        let onAction: @MainActor (Action) -> Void
     }
 
 
@@ -37,6 +37,7 @@ final class ActivationViewModel {
     private let parameters: Parameters
     private let dependencies: Dependencies
 
+    @MainActor
     init(
         parameters: Parameters,
         dependencies: Dependencies
