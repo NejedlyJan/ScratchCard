@@ -6,6 +6,9 @@
 //
 
 final class DependencyContainer {
+    static let shared = DependencyContainer()
+    
+    private init() {}
     // MARK: - Services
     private lazy var generateScratchCardService: GenerateScratchCardService = {
         GenerateScratchCardServiceImp()
@@ -27,6 +30,23 @@ final class DependencyContainer {
     private lazy var activationRepository: ActivationRepository = {
         ActivationRepositoryImp(service: activationService)
     }()
+
+    // MARK: - Use Case
+    private func makeGetScratchCardUseCase() -> GetScratchCardUseCase {
+        GetScratchCardUseCaseImp(repository: scratchCardRepository)
+    }
+
+    private func makeSetScratchCardUseCase() -> SetScratchCardUseCase {
+        SetScratchCardUseCaseImp(repository: scratchCardRepository)
+    }
+
+    private func makeGetScratchCardCodeUseCase() -> GetScratchCardCodeUseCase {
+        GetScratchCardCodeUseCaseImp(repository: generateScratchCardRepository)
+    }
+
+    private func makeActivateCardUseCase() -> ActivateCardUseCase {
+        ActivateCardUseCaseImp(repository: activationRepository)
+    }
 
     // MARK: - Flows
     func makeDashboardFlow() -> DashboardFlow {
@@ -58,12 +78,10 @@ final class DependencyContainer {
     // MARK: - Views
     @MainActor
     private func makeDashboardView(parameters: DashboardViewModel.Parameters) -> DashboardView {
-        let getScratchCardUseCase = GetScratchCardUseCaseImp(repository: scratchCardRepository)
-
         let viewModel = DashboardViewModel(
             parameters: parameters,
             dependencies: DashboardViewModel.Dependencies(
-                getScratchCardUseCase: getScratchCardUseCase
+                getScratchCardUseCase: makeGetScratchCardUseCase()
             )
         )
         return DashboardView(viewModel: viewModel)
@@ -71,14 +89,11 @@ final class DependencyContainer {
 
     @MainActor
     private func makeScratchView(parameters: ScratchViewModel.Parameters) -> ScratchView {
-        let setScratchCardUseCase = SetScratchCardUseCaseImp(repository: scratchCardRepository)
-        let getScratchCardCodeUseCase = GetScratchCardCodeUseCaseImp(repository: generateScratchCardRepository)
-
         let viewModel = ScratchViewModel(
             parameters: parameters,
             dependencies: ScratchViewModel.Dependencies(
-                setScratchCardUseCase: setScratchCardUseCase,
-                getScratchCardCodeUseCase: getScratchCardCodeUseCase
+                setScratchCardUseCase: makeSetScratchCardUseCase(),
+                getScratchCardCodeUseCase: makeGetScratchCardCodeUseCase()
             )
         )
         return ScratchView(viewModel: viewModel)
@@ -86,16 +101,12 @@ final class DependencyContainer {
 
     @MainActor
     private func makeActivationView(parameters: ActivationViewModel.Parameters) -> ActivationView {
-        let getScratchCardUseCase = GetScratchCardUseCaseImp(repository: scratchCardRepository)
-        let setScratchCardUseCase = SetScratchCardUseCaseImp(repository: scratchCardRepository)
-        let activateCardUseCase = ActivateCardUseCaseImp(repository: activationRepository)
-
         let viewModel = ActivationViewModel(
             parameters: parameters,
             dependencies: ActivationViewModel.Dependencies(
-                getScratchCardUseCase: getScratchCardUseCase,
-                setScratchCardUseCase: setScratchCardUseCase,
-                activateCardUseCase: activateCardUseCase
+                getScratchCardUseCase: makeGetScratchCardUseCase(),
+                setScratchCardUseCase: makeSetScratchCardUseCase(),
+                activateCardUseCase: makeActivateCardUseCase()
             )
         )
         return ActivationView(viewModel: viewModel)

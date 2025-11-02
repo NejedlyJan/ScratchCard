@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ScratchCardApp: App {
-    let container = DependencyContainer()
+    let container = DependencyContainer.shared
 
     var body: some Scene {
         WindowGroup {
