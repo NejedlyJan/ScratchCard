@@ -1,3 +1,10 @@
+//
+//  ScratchView.swift
+//  ScratchCard
+//
+//  Created by Jan Nejedlý on 02.11.2025.
+//
+
 import SwiftUI
 
 struct ScratchView: View {
@@ -6,6 +13,10 @@ struct ScratchView: View {
 
     var body: some View {
         VStack(spacing: 20) {
+            Text("Scratch Card Generator")
+                .font(.title)
+                .padding()
+
             switch viewModel.state {
             case .idle:
                 Button("Scratch card") {

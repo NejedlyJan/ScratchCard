@@ -19,7 +19,6 @@ final class ActivationViewModel {
         let onAction: @MainActor (Action) -> Void
     }
 
-
     enum Action {
         case error
     }

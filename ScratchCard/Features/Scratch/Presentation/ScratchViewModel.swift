@@ -35,7 +35,6 @@ final class ScratchViewModel {
         self.dependencies = dependencies
     }
 
-
     func scratch() async {
         guard case .idle = state else { return }
 

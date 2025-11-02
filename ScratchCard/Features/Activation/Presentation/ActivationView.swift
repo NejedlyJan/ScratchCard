@@ -12,8 +12,9 @@ struct ActivationView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Activation Screen")
+            Text("Scratch Card Activation")
                 .font(.title)
+                .padding()
 
             switch viewModel.state {
             case .unscratched:
