@@ -1,0 +1,56 @@
+//
+//  DashboardViewModel.swift
+//  ScratchCard
+//
+//  Created by Jan Nejedlý on 02.11.2025.
+//
+
+import Foundation
+
+@Observable
+final class DashboardViewModel {
+    struct Dependencies {
+        let getScratchCardUseCase: GetScratchCardUseCase
+    }
+
+    struct Parameters {
+        let onAction: (Action) -> Void
+    }
+
+    enum Action {
+        case scratch
+        case activate
+    }
+
+    enum State {
+        case loading
+        case loaded(ScratchCard)
+    }
+
+    @MainActor private(set) var state: State = .loading
+
+    private let parameters: Parameters
+    private let dependencies: Dependencies
+
+    @MainActor
+    init(
+        parameters: Parameters,
+        dependencies: Dependencies
+    ) {
+        self.parameters = parameters
+        self.dependencies = dependencies
+    }
+
+    func onAppear() async {
+        let card = await dependencies.getScratchCardUseCase()
+        state = .loaded(card ?? ScratchCard(state: .unscratched))
+    }
+
+    func onScratch() {
+        parameters.onAction(.scratch)
+    }
+
+    func onActivate() {
+        parameters.onAction(.activate)
+    }
+}

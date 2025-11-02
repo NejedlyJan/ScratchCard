@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ScratchView: View {
-    @StateObject var viewModel: ScratchViewModel
+    var viewModel: ScratchViewModel
     @State private var scratchTask: Task<Void, Never>?
 
     var body: some View {

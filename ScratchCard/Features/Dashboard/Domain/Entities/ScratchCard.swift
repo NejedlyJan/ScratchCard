@@ -6,7 +6,7 @@
 //
 
 struct ScratchCard {
-    enum ScratchCardState {
+    enum ScratchCardState: Equatable {
         case unscratched
         case scratched(code: String)
         case activated

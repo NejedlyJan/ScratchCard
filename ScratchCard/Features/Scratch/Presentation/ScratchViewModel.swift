@@ -1,7 +1,7 @@
-import Combine
 import Foundation
 
-final class ScratchViewModel: ObservableObject {
+@Observable
+final class ScratchViewModel {
     struct Dependencies {
         let setScratchCardUseCase: SetScratchCardUseCase
         let getScratchCardCodeUseCase: GetScratchCardCodeUseCase
@@ -21,7 +21,7 @@ final class ScratchViewModel: ObservableObject {
         case success(code: String)
     }
 
-    @MainActor @Published private(set) var state: State = .idle
+    @MainActor private(set) var state: State = .idle
 
     private let parameters: Parameters
     private let dependencies: Dependencies

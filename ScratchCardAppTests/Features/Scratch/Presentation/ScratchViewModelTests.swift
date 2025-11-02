@@ -11,7 +11,7 @@ import XCTest
 @MainActor
 final class ScratchViewModelTests: XCTestCase {
     
-    func test_whenInitialized_thenStateIsIdle() async throws {
+    func test_whenInitialized_thenStateIsIdle() async {
         let sut = makeSUT()
         
         guard case .idle = sut.state else {
@@ -19,7 +19,7 @@ final class ScratchViewModelTests: XCTestCase {
         }
     }
     
-    func test_givenSuccessfulCode_whenScratch_thenStateIsSuccess() async throws {
+    func test_givenSuccessfulCode_whenScratch_thenStateIsSuccess() async {
         let setScratchCardUseCaseMock = SetScratchCardUseCaseMock()
         let getScratchCardCodeUseCaseMock = GetScratchCardCodeUseCaseMock(scratchCardCode: "test")
         let sut = makeSUT(
@@ -37,7 +37,7 @@ final class ScratchViewModelTests: XCTestCase {
         XCTAssertEqual(code, "test")
     }
 
-    func test_givenFailingCode_whenScratch_thenStateIsIdle_andInvokeAction() async throws {
+    func test_givenFailingCode_whenScratch_thenStateIsIdle_andInvokeAction() async {
         var action: ScratchViewModel.Action?
         let getScratchCardCodeUseCaseMock = FailingGetScratchCardCodeUseCaseMock()
         let sut = makeSUT(getScratchCardCodeUseCase: getScratchCardCodeUseCaseMock) {

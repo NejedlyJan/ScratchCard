@@ -1,5 +1,5 @@
 //
-//  ScratchCardRepositoryMock.swift
+//  GenerateScratchCardRepositoryMock.swift
 //  ScratchCardAppTests
 //
 //  Created by Jan Nejedlý on 01.11.2025.
