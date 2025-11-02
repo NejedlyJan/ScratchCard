@@ -51,8 +51,8 @@ final class ScratchViewModelTests: XCTestCase {
 
 extension ScratchViewModelTests {
     private func makeSUT(
-        setScratchCardUseCase: some SetScratchCardUseCase = SetScratchCardUseCaseMock(),
-        getScratchCardCodeUseCase: some GetScratchCardCodeUseCase = GetScratchCardCodeUseCaseMock(scratchCardCode: ""),
+        setScratchCardUseCase: any SetScratchCardUseCase = SetScratchCardUseCaseMock(),
+        getScratchCardCodeUseCase: any GetScratchCardCodeUseCase = GetScratchCardCodeUseCaseMock(scratchCardCode: ""),
         onAction: @MainActor @escaping (ScratchViewModel.Action) -> Void = { _ in }
     ) -> ScratchViewModel {
         ScratchViewModel(

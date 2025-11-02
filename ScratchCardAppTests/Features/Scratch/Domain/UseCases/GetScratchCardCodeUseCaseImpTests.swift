@@ -22,7 +22,7 @@ final class GetScratchCardCodeUseCaseImpTests: XCTestCase {
 
 extension GetScratchCardCodeUseCaseImpTests {
     private func makeSUT(
-        repository: some GenerateScratchCardRepository = GenerateScratchCardRepositoryMock(code: "")
+        repository: any GenerateScratchCardRepository = GenerateScratchCardRepositoryMock(code: "")
     ) -> GetScratchCardCodeUseCaseImp {
         GetScratchCardCodeUseCaseImp(repository: repository)
     }

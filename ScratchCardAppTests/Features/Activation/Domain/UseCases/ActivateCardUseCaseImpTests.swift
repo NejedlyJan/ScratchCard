@@ -36,7 +36,7 @@ final class ActivateCardUseCaseImpTests: XCTestCase {
 
 extension ActivateCardUseCaseImpTests {
     private func makeSUT(
-        repository: some ActivationRepository = ActivationRepositoryMock(version: 0)
+        repository: any ActivationRepository = ActivationRepositoryMock(version: 0)
     ) -> ActivateCardUseCaseImp {
         ActivateCardUseCaseImp(repository: repository)
     }

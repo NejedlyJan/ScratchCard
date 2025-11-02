@@ -45,6 +45,7 @@ final class ActivationViewModel {
         self.dependencies = dependencies
     }
 
+    @MainActor
     func onAppear() async {
         switch await dependencies.getScratchCardUseCase()?.state {
         case .unscratched, .none:
@@ -57,6 +58,7 @@ final class ActivationViewModel {
         }
     }
 
+    @MainActor
     func activate() async {
         guard case .scratched = state, let code else {
             return
@@ -79,6 +81,7 @@ final class ActivationViewModel {
         }
     }
 
+    @MainActor
     private func handleError() {
         state = .scratched
         parameters.onAction(.error)

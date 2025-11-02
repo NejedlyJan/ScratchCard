@@ -123,9 +123,9 @@ final class ActivationViewModelTests: XCTestCase {
 
 extension ActivationViewModelTests {
     private func makeSUT(
-        getScratchCardUseCase: some GetScratchCardUseCase = GetScratchCardUseCaseMock(),
-        setScratchCardUseCase: some SetScratchCardUseCase = SetScratchCardUseCaseMock(),
-        activateCardUseCase: some ActivateCardUseCase = ActivateCardUseCaseMock(version: 0),
+        getScratchCardUseCase: any GetScratchCardUseCase = GetScratchCardUseCaseMock(),
+        setScratchCardUseCase: any SetScratchCardUseCase = SetScratchCardUseCaseMock(),
+        activateCardUseCase: any ActivateCardUseCase = ActivateCardUseCaseMock(version: 0),
         onAction: @MainActor @escaping (ActivationViewModel.Action) -> Void = { _ in }
     ) -> ActivationViewModel {
         ActivationViewModel(

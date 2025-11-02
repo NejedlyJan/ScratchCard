@@ -36,7 +36,7 @@ final class ActivationRepositoryImpTests: XCTestCase {
 
 extension ActivationRepositoryImpTests {
     private func makeSUT(
-        service: some ActivationService = ActivationServiceMock(version: 0)
+        service: any ActivationService = ActivationServiceMock(version: 0)
     ) -> ActivationRepositoryImp {
         ActivationRepositoryImp(service: service)
     }

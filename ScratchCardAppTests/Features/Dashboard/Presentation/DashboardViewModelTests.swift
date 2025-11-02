@@ -91,7 +91,7 @@ final class DashboardViewModelTests: XCTestCase {
 
 extension DashboardViewModelTests {
     private func makeSUT(
-        getScratchCardUseCase: some GetScratchCardUseCase = GetScratchCardUseCaseMock(),
+        getScratchCardUseCase: any GetScratchCardUseCase = GetScratchCardUseCaseMock(),
         onAction: @MainActor @escaping (DashboardViewModel.Action) -> Void = { _ in }
     ) -> DashboardViewModel {
         DashboardViewModel(

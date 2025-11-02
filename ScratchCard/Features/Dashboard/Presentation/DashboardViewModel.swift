@@ -41,15 +41,18 @@ final class DashboardViewModel {
         self.dependencies = dependencies
     }
 
+    @MainActor
     func onAppear() async {
         let card = await dependencies.getScratchCardUseCase()
         state = .loaded(card ?? ScratchCard(state: .unscratched))
     }
 
+    @MainActor
     func onScratch() {
         parameters.onAction(.scratch)
     }
 
+    @MainActor
     func onActivate() {
         parameters.onAction(.activate)
     }
