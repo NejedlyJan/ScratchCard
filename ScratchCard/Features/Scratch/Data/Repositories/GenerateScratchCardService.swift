@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol GenerateScratchCardService: Sendable {
+protocol GenerateScratchCardService {
     func generateCode() async throws -> String
 }
 
